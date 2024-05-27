@@ -1,5 +1,8 @@
-import { Component } from 'react';
+import { Component,setState } from 'react';
 import './App.css';
+import Myheader from './components/Myheader';
+import Mynav from './components/Mynav';
+import Myarticle from './components/Myarticle';
 
 /*
 function App() {
@@ -10,54 +13,48 @@ function App() {
   );
 }
 */
-
-class Myheader extends Component {
-  
-  render() {
-    // console.log(this.props);
-    // console.log(this);
-    return (
-      <header>
-        <h1 class="logo">{this.props.title}</h1>
-        <p>{this.props.desc}</p>
-      </header>
-    )
-  }
-}
-class Mynav extends Component {
-  render() {
-    return (
-      <nav>
-        <ul>
-          <li><a href="">HTML</a></li>
-          <li><a href="">CSS</a></li>
-          <li><a href="">Javascript</a></li>
-        </ul>
-      </nav>
-    )
-  }
-}
-class Myarticle extends Component {
-  render() {
-    return (
-      <section>
-        <article>
-          <h2>{this.props.title}</h2>
-          <p>{this.props.desc}</p>
-        </article>
-      </section>
-    )
-  }
-}
+ 
 class App extends Component {
-  render() {
+  
+  constructor(props){
+    super(props);
+    this.state = {
+      mode:'read',
+      subject:{
+        title:'react',
+        desc:'Single Page Application'
+      },
+      welcome:{
+        title:'welcome',
+        desc:'welcome to React'
+      },
+      menus:[
+        {id:1, title:'HTML', desc:'Hypertext markup Language'},
+        {id:2, title:'CSS', desc:'CSS is for design'},
+        {id:3, title:'Javascript', desc:'Javascript is for interaction'}
+      ]
+    }
+  }
+  render(){
+    console.log("App 실행");
+    let _title, _desc = null;
+    if(this.state.mode === 'welcome'){
+      _title = this.state.welcome.title;
+      _desc = this.state.welcome.desc;
+    }else if(this.state.mode === 'read'){
+      _title = this.state.menus[0].title;
+      _desc = this.state.menus[0].desc;
+    }
     return (
       <div className="App">
-        <Myheader title="React" desc="Single Page Application"/>
-        <Mynav/>
-        <Myarticle title="HTML" desc="Hypertext markup Language"/>
+        <Myheader title={this.state.subject.title} desc={this.state.subject.desc} onChangePage={()=>{
+          this.setState({mode:'welcome'})
+        }}/>
+        <Mynav data={this.state.menus}/>
+        <Myarticle title={_title} desc={_desc}/>
       </div>
     )
   }
 }
+
 export default App
