@@ -14,8 +14,8 @@ function App() {
 class Myheader extends Component {
   
   render() {
-    console.log(this.props);
-    console.log(this);
+    // console.log(this.props);
+    // console.log(this);
     return (
       <header>
         <h1 class="logo">{this.props.title}</h1>
