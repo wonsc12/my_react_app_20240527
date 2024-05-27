@@ -11,11 +11,21 @@ function App() {
 }
 */
 
+class Myheader extends Component {
+  render() {
+    return (
+      <header>
+        <h1 class="logo">React</h1>
+        <p>Single Page Application</p>
+      </header>
+    )
+  }
+}
 class App extends Component {
   render() {
     return (
       <div className="App">
-        Hello Wrold!
+        <Myheader></Myheader>
       </div>
     )
   }
